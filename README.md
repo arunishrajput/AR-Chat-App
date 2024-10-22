@@ -11,9 +11,9 @@ AR Chat App is a real-time chat application that enables users to communicate th
 
 ## Deployed Application
 
-You can try out the AR Chat App without setting it up yourself! Access the live version at:
+You can try out the AR Chat App without setting it up yourself! Access the live version at: [AR-Chat-App.vercel.app](https://ar-chat-app.vercel.app/)
 
-[AR-Chat-App.vercel.app](https://ar-chat-app.vercel.app/)
+(Frontend deployed on [Vercel](https://vercel.app/) and backend deployed on [Render](https://dashboard.render.com/))
 
 ## Prerequisites
 
