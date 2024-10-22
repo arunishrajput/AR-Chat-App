@@ -48,7 +48,7 @@ You can try out the AR Chat App without setting it up yourself! Access the live 
 
 4. **Update the client-side code:**
 
-    > **Note:** To get your `SOCKET SERVER URL`, you have to do [5th Step (Run the Server)](https://gitkraken.dev/link/dnNjb2RlOi8vZWFtb2Rpby5naXRsZW5zL2xpbmsvci9lOGNlMDU3MjNkZDE2OTQ4OTRkZjNjNjQ0YWVlZWNlNzQzNDg0MTRjL2YvUkVBRE1FLm1kP3VybD1odHRwcyUzQSUyRiUyRmdpdGh1Yi5jb20lMkZhcnVuaXNocmFqcHV0JTJGQ2hhdC1BcHAuZ2l0JmxpbmVzPTU4LTYz?origin=gitlens)
+    > **Note:** To get your `SOCKET SERVER URL`, you have to do [5th Step (Run the Server)](https://github.com/arunishrajput/AR-Chat-App?tab=readme-ov-file#:~:text=Run%20the%20application%3A)
 
     - **Update `client.js`:** In your client JavaScript file (`client.js`), modify the Socket.IO initialization URL with your actual SOCKET SERVER URL.
     - **Change the Socket.IO script source in `index.html`:** In your HTML file (`index.html`), update the Socket.IO script source to use the actual SOCKET SERVER URL. Change the following line:
