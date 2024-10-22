@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AR-Chat - A Realtime Chat App by AR">
+    <link rel="shortcut icon" type="image/png" href="assets/applogo.png" />
+    <meta property="og:title" content="AR-Chat - Realtime Chat App">
+    <meta property="og:description" content="Join and chat in real-time using AR-Chat. Simple and fast.">
+    <meta property="og:image" content="https://ar-chat-app.vercel.app/assets/applogo.png">
+
+    <title>AR-Chat - Realtime Chatt App by AR</title>
+    <script defer src="https://ar-chat-app-h1pj.onrender.com/socket.io/socket.io.js"></script>
+    <script defer src="js/client.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <nav>
+        <img class="logo" src="assets/applogo.png" alt="" />
+        <h1>Welcome to AR-Chat App</h1>
+    </nav>
+    <div class="container"></div>
+    <div class="send">
+        <form action="#" id="send-container">
+            <input type="text" name="messageInp" id="messageInp" placeholder="Message"/>
+            <button class="btn" type="submit">Send</button>
+        </form>
+    </div>
+</body>
+
+</html>
