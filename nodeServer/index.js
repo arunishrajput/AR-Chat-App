@@ -21,7 +21,6 @@ const io = require("socket.io")(port, {
 
 console.log("Backend running on:", process.env.PORT);
 
-
 const users = {};
 
 io.on("connection", (socket) => {
@@ -30,6 +29,8 @@ io.on("connection", (socket) => {
         // console.log("new user joined", username);
         users[socket.id] = username;
         socket.broadcast.emit("user-joined", username);
+        // Send the updated list of users to all connected users
+        io.emit("update-user-list", Object.values(users)); // Update all users with the new list
     });
 
     // If someone sends a message, broadcast it to other people!
@@ -44,5 +45,7 @@ io.on("connection", (socket) => {
     socket.on("disconnect", (message) => {
         socket.broadcast.emit("left", users[socket.id]);
         delete users[socket.id];
+        // Send the updated list of users to all connected users
+        io.emit("update-user-list", Object.values(users));
     });
 });

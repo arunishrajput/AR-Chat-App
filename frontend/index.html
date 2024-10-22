@@ -21,7 +21,15 @@
         <img class="logo" src="assets/applogo.png" alt="" />
         <h1>Welcome to AR-Chat App</h1>
     </nav>
-    <div class="container"></div>
+    <div class="user-list-container">
+        <h3 class="online-users-label">Online users:</h3>
+        <div class="user-list" id="user-list"></div> <!-- User list section outside message container -->
+    </div>
+    <div class="container">
+        <div class="message-container"> <!-- Changed class name for clarity -->
+            <!-- Messages will appear here -->
+        </div>
+    </div>
     <div class="send">
         <form action="#" id="send-container">
             <input type="text" name="messageInp" id="messageInp" placeholder="Message"/>

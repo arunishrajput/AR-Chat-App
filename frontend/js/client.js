@@ -4,6 +4,7 @@ const socket = io("https://ar-chat-app-h1pj.onrender.com/"); // SOCKET SERVER UR
 const form = document.getElementById("send-container");
 const messageInput = document.getElementById("messageInp");
 const messageContainer = document.querySelector(".container");
+const userListContainer = document.querySelector(".user-list"); // New container for user list
 
 // Audio that will play on different events
 var joinaudio = new Audio("assets/audio/joinsound.mp3");
@@ -63,6 +64,17 @@ const append = (message, username, position, messageType = "normal") => {
     messageContainer.scrollTop = messageContainer.scrollHeight;
 };
 
+// Function to update user list
+const updateUserList = (users) => {
+    userListContainer.innerHTML = ""; // Clear existing users
+    users.forEach((user) => {
+        const userElement = document.createElement("span");
+        userElement.classList.add("user");
+        userElement.innerText = user;
+        userListContainer.appendChild(userElement);
+    });
+};
+
 // If a new user joins, receive his/her username from the server
 socket.on("user-joined", (user) => {
     append("joined the chat", user, "right", "event");
@@ -79,6 +91,11 @@ socket.on("receive", (data) => {
 socket.on("left", (user) => {
     append("left the chat", user, "right", "event");
     leftaudio.play();
+});
+
+// Listen for user list updates
+socket.on("update-user-list", (users) => {
+    updateUserList(users);
 });
 
 // If the form gets submitted, send server the message!
