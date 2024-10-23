@@ -42,10 +42,21 @@ io.on("connection", (socket) => {
     });
 
     // If someone leaves the chat, let others know!
-    socket.on("disconnect", (message) => {
-        socket.broadcast.emit("left", users[socket.id]);
-        delete users[socket.id];
+    socket.on("disconnect", () => {
+        const username = users[socket.id]; // Store the username before deletion
+        socket.broadcast.emit("left", username); // Notify others about the user leaving
+        delete users[socket.id]; // Remove user from the list
         // Send the updated list of users to all connected users
-        io.emit("update-user-list", Object.values(users));
+        io.emit("update-user-list", Object.values(users)); // Update all users with the new list
+    });
+
+    // When a user is typing
+    socket.on("typing", (username) => {
+        socket.broadcast.emit("typing", username); // Emit the username directly
+    });
+
+    // When a user stops typing
+    socket.on("stop-typing", () => {
+        socket.broadcast.emit("stop-typing"); // Emit stop-typing event
     });
 });

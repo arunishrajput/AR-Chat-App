@@ -26,13 +26,15 @@
         <div class="user-list" id="user-list"></div> <!-- User list section outside message container -->
     </div>
     <div class="container">
-        <div class="message-container"> <!-- Changed class name for clarity -->
-            <!-- Messages will appear here -->
+        <!-- Message container -->
+        <div id="messages" class="message-container">
+            <!-- Messages will be appended here -->
         </div>
+        <div class="typing-indicator" style="display: none;"></div> <!-- Typing indicator -->
     </div>
     <div class="send">
         <form action="#" id="send-container">
-            <input type="text" name="messageInp" id="messageInp" placeholder="Message"/>
+            <input type="text" name="messageInp" id="messageInp" placeholder="Message" />
             <button class="btn" type="submit">Send</button>
         </form>
     </div>

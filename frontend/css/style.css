@@ -190,3 +190,9 @@ h1 {
 .user:hover {
     background: #b2c9e6; /* Change background on hover */
 }
+
+.typing-indicator {
+    color: gray; /* Change to your desired color */
+    font-style: italic;
+    margin: 5px; /* Add some spacing */
+}
