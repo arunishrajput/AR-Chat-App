@@ -3,9 +3,12 @@ const socket = io("https://ar-chat-app-h1pj.onrender.com/"); // SOCKET SERVER UR
 // Get DOM elements in respective Js variables
 const form = document.getElementById("send-container");
 const messageInput = document.getElementById("messageInp");
-const messageContainer = document.querySelector(".container .message-container"); // Updated selector
+const messageContainer = document.querySelector(
+    ".container .message-container"
+); // Updated selector
 const userListContainer = document.querySelector(".user-list"); // New container for user list
 const typingIndicator = document.querySelector(".typing-indicator"); // Typing indicator element
+let isAtBottom = true; // Default to true, assuming the user starts at the bottom
 
 // Audio that will play on different events
 var joinaudio = new Audio("assets/audio/joinsound.mp3");
