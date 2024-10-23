@@ -8,6 +8,8 @@ AR Chat App is a real-time chat application that enables users to communicate th
 -   User identification with customizable usernames
 -   Timestamped messages for better context
 -   Audio alerts for different chat events
+-   Online users list
+-   "typing..." indicator
 
 ## Deployed Application
 
