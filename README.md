@@ -50,7 +50,15 @@ You can try out the AR Chat App without setting it up yourself! Access the live 
 
     > **Note:** To get your `SOCKET SERVER URL`, you have to do [5th Step (Run the Server)](https://github.com/arunishrajput/AR-Chat-App?tab=readme-ov-file#:~:text=Run%20the%20application%3A)
 
-    - **Update `client.js`:** In your client JavaScript file (`client.js`), modify the Socket.IO initialization URL with your actual SOCKET SERVER URL.
+    - **Update `client.js`:** In your client JavaScript file (`client.js`), modify the Socket.IO initialization URL with your actual SOCKET SERVER URL. Change the following line:
+        ```bash
+        const socket = io("https://ar-chat-app-h1pj.onrender.com/"); // SOCKET SERVER URL
+        ```
+        To
+        ```bash
+        const socket = io("YOUR_SOCKET_SERVER_URL"); // SOCKET SERVER URL
+        ```
+        Replace YOUR_SOCKET_SERVER_URL with your actual SOCKET SERVER URL.
     - **Change the Socket.IO script source in `index.html`:** In your HTML file (`index.html`), update the Socket.IO script source to use the actual SOCKET SERVER URL. Change the following line:
         ```bash
         <script defer src="https://ar-chat-app-h1pj.onrender.com/socket.io/socket.io.js"></script> <!-- SOCKET SERVER URL -->
