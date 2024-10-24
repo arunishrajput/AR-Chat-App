@@ -44,24 +44,17 @@ h1 {
 .container {
     width: 95%;
     max-width: 955px;
-    border: 2px solid #170f64;
+    border: 2px solid #2a1b90;
     border-radius: 13px;
     margin: auto;
     height: 60vh;
-    padding: 5px;
+    padding: 3px;
     overflow-y: auto; /* Scroll only for messages */
     margin-bottom: 1px;
-    background: rgba(255, 255, 255, 0.8); /* Faded white overlay */
     background-image: url("background.jpg"); /* Replace with your image URL */
     background-size: cover; /* Adjust the image to cover the entire container */
     background-position: center; /* Center the image */
     position: relative; /* For proper layering */
-}
-
-.timestamp {
-    font-size: 0.8em; /* Smaller font size for the timestamp */
-    color: rgba(108, 117, 125, 0.6); /* Faded gray color */
-    margin-left: 5px; /* Space between message and timestamp */
 }
 
 .message-container {
@@ -70,12 +63,14 @@ h1 {
 }
 
 .message {
-    background-color: #e8eaf6;
+    background-color: #ffffff;
     width: auto;
     max-width: 60%;
-    padding: 10px;
-    margin: 17px 12px;
-    border: 2px solid #635abf;
+    padding: 6px;
+    margin: 2px 10px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    border: none;
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
 }
@@ -83,51 +78,110 @@ h1 {
 .left {
     float: left;
     clear: both;
+    margin-bottom: 2px;
+    background-color: #e0e7ef;
+    color: black;
+}
+
+.left + .right,
+.right + .left {
+    margin-top: 15px; /* Larger space when switching between left and right messages */
 }
 
 .right {
     float: right;
     clear: both;
+    margin-bottom: 2px;
+    background-color: #8eb4e6;
+    color: black;
+}
+
+.center {
+    float: center;
+    clear: both;
+}
+
+/* Custom styles for event messages (like join/left) */
+.event-message {
+    background-color: #f0f4c3; /* Light yellow background for event messages */
+    color: #5d4037; /* Brown text for better visibility */
+    font-weight: bold; /* Make it stand out */
+    width: fit-content;
+    max-width: 60%;
+    padding: 3px;
+    margin: 15px auto;
+    border: 2px solid #c0ca33;
+    text-align: center;
+    font-family: serif;
+    font-size: 10px;
+    border-radius: 10px;
+}
+
+.timestamp {
+    font-size: 0.8em; /* Smaller font size for the timestamp */
+    color: #8d8d8d;
+    margin-left: 5px; /* Space between message and timestamp */
+}
+
+.typing-indicator {
+    color: #ceda21; /* Change to your desired color */
+    font-style: italic;
+    background-color: transparent;
+    font-family: "Times New Roman", Times, serif;
 }
 
 #send-container {
-    display: block;
+    display: flex;
     margin: auto;
     text-align: center;
     max-width: 955px;
-    width: 100%;
-    display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 5px;
 }
 
 #messageInp {
     min-width: 60%;
     height: 34px;
     flex: 1;
-    border: 2px solid #170f64;
-    border-radius: 6px;
-    font-size: 22px;
-    background: #f1f2f6;
-    color: #170f64;
+    border: 2px solid #2a1b90;
+    border-radius: 8px;
+    font-size: 16px;
+    background: #f9f9f9;
+    color: #36005d;
+    padding: 10px;
+    transition: border-color 0.3s;
+}
+
+#messageInp:focus {
+    outline: none;
+    border-color: #7b68ee;
+    box-shadow: 0 0 5px rgba(123, 104, 238, 0.5);
 }
 
 .btn {
     width: auto;
-    background: #170f64;
+    background: #6a5acd;
     color: white;
     font-weight: bold;
-    padding: 0 10px;
+    padding: 10px 15px;
     margin: 3px;
     cursor: pointer;
-    border: 2px solid white;
-    border-radius: 6px;
+    border: none;
+    border-radius: 8px;
     height: 34px;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .btn:hover {
-    background: #4c477d;
+    background: #5a4eae;
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 600px) {
@@ -137,26 +191,13 @@ h1 {
 }
 
 .online-users-label {
-    font-size: 18px; /* Adjust size as needed */
-    color: #170f64; /* Color of the label */
+    font-size: 16px; /* Adjust size as needed */
+    color: #4b0082; /* Color of the label */
     margin: 10px auto; /* Center and space it nicely */
     margin-top: auto;
     margin-bottom: auto;
     text-align: center; /* Center the text */
-}
-
-/* Custom styles for event messages (like join/left) */
-.event-message {
-    background-color: #f0f4c3; /* Light yellow background for event messages */
-    color: #5d4037; /* Brown text for better visibility */
-    font-weight: bold; /* Make it stand out */
-    width: auto;
-    max-width: 60%;
-    padding: 8px;
-    margin: 15px auto;
-    border: 2px solid #c0ca33;
-    border-radius: 8px;
-    text-align: center;
+    font-weight: bold;
 }
 
 .user-list-container {
@@ -166,33 +207,33 @@ h1 {
 .user-list {
     width: 95%;
     max-width: 955px;
-    border: 2px solid #170f64;
-    border-radius: 13px;
+    border: 2px solid #2a1b90;
+    border-radius: 15px;
     margin: 2px auto;
     padding: 6px;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     height: auto; /* Auto height to accommodate blocks */
     overflow-x: auto; /* Allow horizontal scrolling */
     overflow-y: hidden;
     white-space: nowrap;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .user {
     display: inline-block; /* Allow users to appear in a block format */
     padding: 5px 10px;
-    border-radius: 10px;
-    margin-right: 5px; /* Space between user blocks */
-    background: #e8eaf6; /* Light background for user blocks */
-    color: #170f64; /* User name color */
-    transition: background 0.3s; /* Smooth background transition */
+    border-radius: 12px;
+    margin-right: 6px; /* Space between user blocks */
+    background: #e3f2fd; /* Light background for user blocks */
+    color: #4b0082; /* User name color */
+    transition: background 0.3s, transform 0.2s; /* Smooth transitions */
 }
 
 .user:hover {
-    background: #b2c9e6; /* Change background on hover */
+    background: #bbdefb; /* Change background on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
 }
 
-.typing-indicator {
-    color: gray; /* Change to your desired color */
-    font-style: italic;
-    margin: 5px; /* Add some spacing */
+.user:active {
+    transform: translateY(0); /* Reset on click */
 }

@@ -59,7 +59,7 @@ const append = (message, username, position, messageType = "normal") => {
 
     // Create a span for the timestamp in subscript
     const timestampElement = document.createElement("span");
-    timestampElement.innerHTML = ` <sub class="timestamp">[${getCurrentTime()}]</sub>`; // Add the timestamp with a class
+    timestampElement.innerHTML = ` <sub class="timestamp">${getCurrentTime()}</sub>`; // Add the timestamp with a class
 
     // Append username, message, and timestamp to the message element
     messageElement.append(usernameElement, messageText, timestampElement);
@@ -103,7 +103,7 @@ const hideTyping = () => {
 
 // If a new user joins, receive their username from the server
 socket.on("user-joined", (user) => {
-    append("joined the chat", user, "right", "event");
+    append("joined the chat", user, "center", "event");
     joinaudio.play();
     if (isAtBottom) {
         messageContainer.scrollTop = messageContainer.scrollHeight;
@@ -122,7 +122,7 @@ socket.on("receive", (data) => {
 
 // If a user leaves the chat, append the info to the container
 socket.on("left", (user) => {
-    append("left the chat", user, "right", "event");
+    append("left the chat", user, "center", "event");
     leftaudio.play();
     if (isAtBottom) {
         messageContainer.scrollTop = messageContainer.scrollHeight;
