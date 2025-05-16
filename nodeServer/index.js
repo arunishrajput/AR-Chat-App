@@ -4,7 +4,7 @@ require("dotenv").config(); // Load environment variables
 
 const port = process.env.PORT || 8000;
 
-const allowedOrigins = [process.env.CLIENT_1_URL, process.env.CLIENT_2_URL]; // Fetch allowed client origins from the environment variable.
+const allowedOrigins = [process.env.CLIENT_1_URL, process.env.CLIENT_2_URL, process.env.CLIENT_3_URL]; // Fetch allowed client origins from the environment variable.
 
 const io = require("socket.io")(port, {
     cors: {
