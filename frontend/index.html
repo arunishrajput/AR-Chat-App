@@ -17,6 +17,17 @@
 </head>
 
 <body>
+    <!-- Username modal shown on load, replaces the old blocking window.prompt() -->
+    <div class="modal-overlay visible" id="username-modal">
+        <form class="modal" id="username-form">
+            <img class="modal-logo" src="assets/applogo.png" alt="" />
+            <h2>Welcome to AR-Chat</h2>
+            <p>Enter a username to join the conversation</p>
+            <input type="text" id="username-input" placeholder="Your name" autocomplete="off" maxlength="20" />
+            <p class="modal-error" id="username-error">Please enter a valid username.</p>
+            <button class="btn" type="submit">Join Chat</button>
+        </form>
+    </div>
     <nav>
         <img class="logo" src="assets/applogo.png" alt="" />
         <h1>Welcome to AR-Chat App</h1>

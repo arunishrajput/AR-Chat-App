@@ -8,6 +8,10 @@ const messageContainer = document.querySelector(
 ); // Updated selector
 const userListContainer = document.querySelector(".user-list"); // New container for user list
 const typingIndicator = document.querySelector(".typing-indicator"); // Typing indicator element
+const usernameModal = document.getElementById("username-modal");
+const usernameForm = document.getElementById("username-form");
+const usernameInput = document.getElementById("username-input");
+const usernameError = document.getElementById("username-error");
 let isAtBottom = true; // Default to true, assuming the user starts at the bottom
 
 // Audio that will play on different events
@@ -19,17 +23,25 @@ var leftaudio = new Audio("assets/audio/leftsound.mp3");
 let username; // Initialize the username variable
 let typingTimeout; // Variable to store typing timeout
 
-// Function to ask for username
+// Function to ask for username via the in-page modal (non-blocking, unlike window.prompt)
 const askForUsername = () => {
-    username = prompt("Enter a username to join: ");
-    if (!username || username.trim() === "") {
-        // If the username is invalid, show a message and return
-        alert("Username cannot be empty. Please enter a valid username.");
-        askForUsername(); // Recursively ask for username again
-    } else {
-        socket.emit("new-user-joined", username); // Emit the username to the server
-    }
+    usernameModal.classList.add("visible");
+    usernameInput.focus();
 };
+
+// Handle username modal submission
+usernameForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const enteredName = usernameInput.value.trim();
+    if (!enteredName) {
+        usernameError.classList.add("visible");
+        return;
+    }
+    username = enteredName;
+    usernameError.classList.remove("visible");
+    usernameModal.classList.remove("visible");
+    socket.emit("new-user-joined", username); // Emit the username to the server
+});
 
 // Call the function initially
 askForUsername();
@@ -84,7 +96,10 @@ const showTyping = (user) => {
     // Create typing indicator element
     const typingElement = document.createElement("div");
     typingElement.classList.add("message", "left", "typing-indicator");
-    typingElement.innerHTML = `<strong>${user}</strong>: is typing...`;
+
+    const typingUser = document.createElement("strong");
+    typingUser.innerText = user;
+    typingElement.append(typingUser, document.createTextNode(": is typing..."));
 
     messageContainer.appendChild(typingElement); // Append to message container
     // Scroll to the bottom if the user is at the bottom
@@ -163,11 +178,13 @@ form.addEventListener("submit", (e) => {
     e.preventDefault();
     if (!username) {
         // If no username, ask for it again
-        alert("You need to enter a username first!");
         askForUsername();
         return; // Stop the function if no username
     }
-    const message = messageInput.value;
+    const message = messageInput.value.trim();
+    if (!message) {
+        return; // Don't send empty/whitespace-only messages
+    }
     append(message, "You", "right");
     socket.emit("send", message);
     socket.emit("stop-typing"); // Stop typing indication after sending

@@ -1,104 +1,146 @@
-# AR Chat App
+<div align="center">
+  <img src="frontend/assets/applogo.png" width="72" height="72" alt="AR-Chat logo" />
 
-AR Chat App is a real-time chat application that enables users to communicate through text messages. It leverages Socket.IO for real-time communication and is built with plain JavaScript on the client side.
+  # AR Chat App
+
+  A real-time chat application built with **Socket.IO** and plain JavaScript — no frontend framework, no build step, just a fast WebSocket chat room.
+
+  [**Live Demo**](https://ar-chat-app.vercel.app/) · [Report a Bug](https://github.com/arunishrajput/ar-chat-app/issues) · [Request a Feature](https://github.com/arunishrajput/ar-chat-app/issues)
+
+  ![Node](https://img.shields.io/badge/node-%3E%3D14-339933?logo=node.js&logoColor=white)
+  ![Socket.IO](https://img.shields.io/badge/Socket.IO-4.x-010101?logo=socket.io&logoColor=white)
+  ![Deploy](https://img.shields.io/badge/frontend-Vercel-000000?logo=vercel&logoColor=white)
+  ![Deploy](https://img.shields.io/badge/backend-Render-46E3B7?logo=render&logoColor=white)
+</div>
+
+## Preview
+
+| Join the chat | Conversation | Typing indicator |
+| :---: | :---: | :---: |
+| ![Join modal](frontend/assets/screenshots/join-modal.jpg) | ![Chat conversation](frontend/assets/screenshots/chat-conversation.jpg) | ![Typing indicator](frontend/assets/screenshots/typing-indicator.jpg) |
 
 ## Features
 
--   Real-time messaging using Socket.IO
--   User identification with customizable usernames
--   Timestamped messages for better context
--   Audio alerts for different chat events
--   Online users list
--   "typing..." indicator
+- **Real-time messaging** powered by Socket.IO
+- **Custom usernames** — pick a name via a lightweight in-page modal when you join
+- **Online users list** that updates live as people join and leave
+- **"is typing..." indicator** so you can see when someone's composing a message
+- **Timestamped messages** for context
+- **Audio cues** for joins, leaves, sent messages, and received messages
+- **Responsive layout** that adapts to mobile screens
 
-## Deployed Application
+## Tech Stack
 
-You can try out the AR Chat App without setting it up yourself! Access the live version at: [AR-Chat-App.vercel.app](https://ar-chat-app.vercel.app/)
+| Layer | Tech |
+| --- | --- |
+| Frontend | HTML5, CSS3, vanilla JavaScript, [Socket.IO client](https://socket.io/) |
+| Backend | [Node.js](https://nodejs.org/), [Socket.IO server](https://socket.io/), [dotenv](https://www.npmjs.com/package/dotenv) |
+| Hosting | Frontend on [Vercel](https://vercel.com/), backend on [Render](https://render.com/) |
 
-(Frontend deployed on [Vercel](https://vercel.app/) and backend deployed on [Render](https://dashboard.render.com/))
+## Project Structure
 
-## Prerequisites
+```
+ar-chat-app/
+├── frontend/
+│   ├── assets/            # Logo, sound effects, screenshots
+│   ├── css/                # Styles + chat background
+│   ├── js/client.js        # All client-side Socket.IO logic
+│   └── index.html
+└── nodeServer/
+    ├── index.js             # Socket.IO server + CORS + presence/typing events
+    ├── package.json
+    └── .env.example         # Template for required environment variables
+```
 
--   Node.js (version 14 or higher)
--   A modern web browser
--   An internet connection
+## Getting Started
 
-## Installation
+### Prerequisites
 
-1. **Clone the repository:**
+- [Node.js](https://nodejs.org/) v14 or later
+- A modern web browser
 
-    ```bash
-    git clone https://github.com/arunishrajput/ar-chat-app.git
-    cd ar-chat-app
-    ```
+### 1. Clone the repository
 
-2. **Install dependencies:**
+```bash
+git clone https://github.com/arunishrajput/ar-chat-app.git
+cd ar-chat-app
+```
 
-    ```bash
-    npm install
-    ```
+### 2. Run the backend
 
-3. **Set up environment variables for `nodeServer`:**
+The Socket.IO server lives in `nodeServer/`.
 
-    Create a `.env` file in the `nodeServer` folder of your project and add the following line, replacing `PORT_No`, `CLIENT_1_URL` and/or `CLIENT_2_URL` with your port no and actual client URLs you want to allow:
+```bash
+cd nodeServer
+npm install
+cp .env.example .env
+```
 
-    ```bash
-    PORT=PORT_No //example:8000
-    CLIENT_1_URL=CLIENT_1_URL
-    CLIENT_2_URL=CLIENT_2_URL
-    ```
+Edit `.env` and set the port you want the server to run on, plus every origin you'll be serving the frontend from (see [Environment Variables](#environment-variables)):
 
-4. **Update the client-side code:**
+```bash
+PORT=8000
+CLIENT_1_URL=http://127.0.0.1:5500
+```
 
-    > **Note:** To get your `SOCKET SERVER URL`, you have to do [5th Step (Run the Server)](https://github.com/arunishrajput/AR-Chat-App?tab=readme-ov-file#:~:text=Run%20the%20application%3A)
+Start it:
 
-    - **Update `client.js`:** In your client JavaScript file (`client.js`), modify the Socket.IO initialization URL with your actual SOCKET SERVER URL. Change the following line:
-        ```bash
-        const socket = io("https://ar-chat-app-h1pj.onrender.com/"); // SOCKET SERVER URL
-        ```
-        To
-        ```bash
-        const socket = io("YOUR_SOCKET_SERVER_URL"); // SOCKET SERVER URL
-        ```
-        Replace YOUR_SOCKET_SERVER_URL with your actual SOCKET SERVER URL.
-    - **Change the Socket.IO script source in `index.html`:** In your HTML file (`index.html`), update the Socket.IO script source to use the actual SOCKET SERVER URL. Change the following line:
-        ```bash
-        <script defer src="https://ar-chat-app-h1pj.onrender.com/socket.io/socket.io.js"></script> <!-- SOCKET SERVER URL -->
-        ```
-        To
-        ```bash
-        <script defer src="YOUR_SOCKET_SERVER_URL/socket.io/socket.io.js"></script> <!-- SOCKET SERVER URL -->
-        ```
-        Replace YOUR_SOCKET_SERVER_URL with your actual SOCKET SERVER URL.
+```bash
+npm start
+```
 
-5. **Run the application:**
+You should see `Backend running on: 8000` (or whichever port you chose).
 
-    Start the server and get your `SOCKET SERVER URL`:
+### 3. Point the frontend at your backend
 
-    ```bash
-    node index.js
-    ```
+By default, `frontend/index.html` and `frontend/js/client.js` are wired to the deployed backend at `https://ar-chat-app-h1pj.onrender.com/`. If you're running your own server, update the socket URL in **both** places to match the `PORT` from step 2:
+
+**`frontend/js/client.js`**
+
+```js
+const socket = io("http://localhost:8000/"); // SOCKET SERVER URL
+```
+
+**`frontend/index.html`**
+
+```html
+<script defer src="http://localhost:8000/socket.io/socket.io.js"></script> <!-- SOCKET SERVER URL -->
+```
+
+### 4. Serve the frontend
+
+`frontend/index.html` needs to be served over HTTP (not opened directly as a `file://` URL) so the Socket.IO CORS check passes. Any static server works, for example:
+
+```bash
+cd frontend
+npx serve .
+# or: python3 -m http.server 5500
+```
+
+Then open the printed URL in your browser — make sure it matches one of the `CLIENT_*_URL` values in your `.env`.
+
+## Environment Variables
+
+Set these in `nodeServer/.env` (see `nodeServer/.env.example`):
+
+| Variable | Description |
+| --- | --- |
+| `PORT` | Port the Socket.IO server listens on |
+| `CLIENT_1_URL` | An allowed frontend origin for CORS |
+| `CLIENT_2_URL` | Another allowed frontend origin (optional) |
+| `CLIENT_3_URL` | Another allowed frontend origin (optional) |
 
 ## Usage
 
-1. Open the chat application in your browser.
-2. Enter a username when prompted.
-3. Start chatting with other users!
+1. Open the chat app in your browser.
+2. Enter a username in the join modal and click **Join Chat**.
+3. Start chatting — messages, joins/leaves, and typing status are broadcast to everyone connected.
 
-## Audio Notifications
+## Contributing
 
-The application includes audio notifications for different events:
-
--   Join sound when a new user joins the chat
--   Send sound when a message is sent
--   Receive sound when a message is received
--   Left sound when a user leaves the chat
-
-## Contribution
-
--   Feel free to fork this repository, create a feature branch, and submit a pull request. Contributions, issues, and feature requests are welcome!
+Contributions are welcome! Fork the repo, create a feature branch, and open a pull request. For larger changes, please open an issue first to discuss what you'd like to change.
 
 ## Acknowledgments
 
--   [Socket.IO](https://socket.io/)
--   [Node.js](https://nodejs.org/)
+- [Socket.IO](https://socket.io/)
+- [Node.js](https://nodejs.org/)
